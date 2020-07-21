@@ -13,13 +13,15 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.Material;
 
 public class PlayerFreeze implements Listener {
-
     @EventHandler
     public static void playerMove(PlayerMoveEvent event) {
         if(ChanaSMP.FreezedPlayers.contains(event.getPlayer().getName())) {
-            event.setCancelled(true);
+            event.getPlayer().teleport(event.getFrom());
             event.getPlayer().sendMessage(ChatColor.GREEN + "[ChanaSMP] " + ChatColor.RED + "You have been frozen, you cannot move!");
         }
     }
