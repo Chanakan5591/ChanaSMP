@@ -24,6 +24,7 @@ public class PlayerFreeze implements Listener {
         }
     }
 
+    @EventHandler
     public static void playerDropItems(PlayerDropItemEvent event) {
         if(ChanaSMP.FreezedPlayers.contains(event.getPlayer().getName())) {
             event.setCancelled(true);
@@ -31,6 +32,7 @@ public class PlayerFreeze implements Listener {
         }
     }
 
+    @EventHandler
     public static void playerInteract(PlayerInteractEvent event) {
         if(ChanaSMP.FreezedPlayers.contains(event.getPlayer().getName())) {
             event.setCancelled(true);
@@ -38,11 +40,14 @@ public class PlayerFreeze implements Listener {
         }
     }
 
+    @EventHandler
     public static void playerAttackEntity(EntityDamageEvent event) {
         if(ChanaSMP.FreezedPlayers.contains(event.getEntity().getName())) {
             event.setCancelled(true);
         }
     }
+
+    @EventHandler
     public static void playerGetAttackByEntity(EntityDamageByEntityEvent event) {
         if(event.getDamager() instanceof Player) {
             if(event.getEntity() instanceof Player) {
@@ -52,6 +57,7 @@ public class PlayerFreeze implements Listener {
             }
         }
     }
+
     @EventHandler
     public void playerOnBow(EntityDamageByEntityEvent event) {
         if(event.getDamager() instanceof Arrow) {
@@ -62,6 +68,7 @@ public class PlayerFreeze implements Listener {
             }
         }
     }
+
     @EventHandler
     public void playerOnCommands(PlayerCommandPreprocessEvent event) {
         if (ChanaSMP.FreezedPlayers.contains(event.getPlayer().getName())) {
@@ -73,6 +80,7 @@ public class PlayerFreeze implements Listener {
             }
         }
     }
+
     @EventHandler
     public void onFoodLevelChange(FoodLevelChangeEvent event) {
         if (event.getEntity() instanceof Player) {
@@ -81,6 +89,7 @@ public class PlayerFreeze implements Listener {
             }
         }
     }
+
     @EventHandler
     public void onFight(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player) {
@@ -91,6 +100,7 @@ public class PlayerFreeze implements Listener {
             }
         }
     }
+
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         if(ChanaSMP.FreezedPlayers.contains(event.getPlayer().getName())) {
