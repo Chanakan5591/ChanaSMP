@@ -13,9 +13,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.Material;
 
 public class PlayerFreeze implements Listener {
     @EventHandler
@@ -106,15 +103,13 @@ public class PlayerFreeze implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         if(ChanaSMP.FreezedPlayers.contains(event.getPlayer().getName())) {
-            for (Player pl : ChanaSMP.plugin.getServer().getOnlinePlayers()) {
+            for (Player pl : Bukkit.getOnlinePlayers()) {
                 if (pl.hasPermission("chanasmp.quitmessage")) {
                     pl.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Frozen player &b had quit!"));
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ban " + event.getPlayer().getName() + "Suspected of Unfair Advantages");
-                }
-                else {
-                    return;
                 }
             }
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ban " + event.getPlayer().getName() + " Suspected of Unfair Advantages");
+            ChanaSMP.FreezedPlayers.remove(event.getPlayer().getName());
         }
     }
 
