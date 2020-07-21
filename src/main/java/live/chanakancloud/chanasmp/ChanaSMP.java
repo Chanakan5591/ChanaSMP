@@ -18,10 +18,13 @@ public class ChanaSMP extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         getLogger().info("ChanaSMP v0.1.0-DEV Loading..");
+        getLogger().info("Registering Events");
         getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         getServer().getPluginManager().registerEvents(new PlayerFreeze(), this);
+        getLogger().info("registering commands");
         this.getCommand("freeze").setExecutor(new FreezeCommand());
         this.getCommand("unfreeze").setExecutor(new UnfreezeCommand());
+        getLogger().info("Hooking into packet listener");
         PacketListener.Listener();
     }
 

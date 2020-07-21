@@ -12,6 +12,7 @@ public class UnfreezeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(args[0].isEmpty()) {
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Usage: /unfreeze <Player Name>"));
             return false;
         }
         for (Player p : Bukkit.getOnlinePlayers()) {
