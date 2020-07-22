@@ -21,10 +21,10 @@ public class ChanaSMP extends JavaPlugin {
         getLogger().info("Registering Events");
         getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         getServer().getPluginManager().registerEvents(new PlayerFreeze(), this);
-        getLogger().info("registering commands");
+        getLogger().info("Registering Commands");
         this.getCommand("freeze").setExecutor(new FreezeCommand());
         this.getCommand("unfreeze").setExecutor(new UnfreezeCommand());
-        getLogger().info("Hooking into packet listener");
+        getLogger().info("Hooking into PacketListener");
         PacketListener.Listener();
     }
 
