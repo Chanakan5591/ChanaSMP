@@ -1,43 +1,29 @@
 package live.chanakancloud.chanasmp.commands;
 
+import live.chanakancloud.chanasmp.events.BotDuelGUI;
+import live.chanakancloud.chanasmp.ChanaSMP;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.event.Listener;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import java.util.Arrays;
-
-public class BotDuelCommand implements Listener {
-    private final Inventory inv;
-
-    public BotDuelCommand() {
-        inv = Bukkit.createInventory(null, 8, "Kits");
-        initializeItems();
+public class BotDuelCommand implements CommandExecutor {
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if(args.length == 0) {
+            ;
+        }
+        if(sender instanceof Player) {
+            BotDuelGUI bdg = new BotDuelGUI();
+            bdg.initializeItems();
+            Player p = (Player) sender;
+            bdg.openInventory(p);
+            return true;
+        } else {
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&c Only Player can use this command!"));
+            return true;
+        }
     }
-    public void initializeItems() {
-        inv.addItem(createGuiItem(Material.DIAMOND_SWORD, "Example Sword", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.IRON_HELMET, "§bExample Helmet", "§aFirst line of the lore", "§bSecond line of the lore"));
-    }
-    protected ItemStack createGuiItem(final Material material, final String name, final String... lore) {
-        final ItemStack item = new ItemStack(material, 1);
-        final ItemMeta meta = item.getItemMeta();
-
-        // Set the name of the item
-        meta.setDisplayName(name);
-
-        // Set the lore of the item
-        meta.setLore(Arrays.asList(lore));
-
-        item.setItemMeta(meta);
-
-        return item;
-    }
-    public void openInventory(final HumanEntity ent) {
-        ent.openInventory(inv);
-    }
-
-
 }

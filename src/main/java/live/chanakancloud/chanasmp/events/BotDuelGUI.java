@@ -18,12 +18,12 @@ public class BotDuelGUI implements Listener {
     public static Inventory inv;
 
     public BotDuelGUI() {
-        inv = Bukkit.createInventory(null, 8, "Bot Duel Kits");
+        inv = Bukkit.createInventory(null, 9, "Bot Duel Kits");
         initializeItems();
     }
     public void initializeItems() {
-        inv.addItem(createGuiItem(Material.DIAMOND_SWORD, "Diamond Sword", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.IRON_HELMET, "§bExample Helmet", "§aFirst line of the lore", "§bSecond line of the lore"));
+        inv.addItem(createGuiItem(Material.DIAMOND_SWORD, "&anodebuf", null, null));
+        inv.addItem(createGuiItem(Material.IRON_HELMET, "§bdebuf", null, null));
     }
     protected ItemStack createGuiItem(final Material material, final String name, final String... lore) {
         final ItemStack item = new ItemStack(material, 1);
@@ -39,8 +39,8 @@ public class BotDuelGUI implements Listener {
 
         return item;
     }
-    public void openInventory(final HumanEntity entity) {
-        entity.openInventory(inv);
+    public void openInventory(final Player player) {
+        player.openInventory(inv);
     }
 
     @EventHandler
@@ -49,7 +49,18 @@ public class BotDuelGUI implements Listener {
         event.setCancelled(true);
         final ItemStack ClickedItem = event.getCurrentItem();
         if(ClickedItem == null || ClickedItem.getType() == Material.AIR) return;
+        if(ClickedItem.getType() == Material.DIAMOND_SWORD) {
+            TeleportToArenaSpawnNPC(0);
+        }
         final Player p = (Player) event.getWhoClicked();
+    }
+
+    public void TeleportToArenaSpawnNPC(int gameMode) {
+        
+        switch (gameMode) {
+            case 0:
+                ; //TODOS 
+        }
     }
 
     @EventHandler

@@ -11,9 +11,9 @@ import org.bukkit.entity.Player;
 public class FreezeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (args == null) {
+        if (args.length == 0) {
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Usage: /freeze <Player Name>"));
-            return false;
+            return true;
         }
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (p.getName().equals(args[0])) {
