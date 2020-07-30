@@ -22,7 +22,7 @@ public class BotDuelGUI implements Listener {
         initializeItems();
     }
     public void initializeItems() {
-        inv.addItem(createGuiItem(Material.DIAMOND_SWORD, "&anodebuf", null, null));
+        inv.addItem(createGuiItem(Material.DIAMOND_SWORD, "§anodebuf", null, null));
         inv.addItem(createGuiItem(Material.IRON_HELMET, "§bdebuf", null, null));
     }
     protected ItemStack createGuiItem(final Material material, final String name, final String... lore) {
