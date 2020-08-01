@@ -1,14 +1,18 @@
 package live.chanakancloud.chanasmp.events;
 
+import live.chanakancloud.chanasmp.ChanaSMP;
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -54,23 +58,40 @@ public class BotDuelGUI implements Listener {
         event.setCancelled(true);
         final ItemStack ClickedItem = event.getCurrentItem();
         if(ClickedItem == null || ClickedItem.getType() == Material.AIR) return;
-        HumanEntity PlayerSender = event.getWhoClicked();
+        Player PlayerSender = (Player) event.getWhoClicked();
         if(ClickedItem.getType() == Material.DIAMOND_SWORD) {
             TeleportToArenaSpawnNPC(0, PlayerSender);
         }
-        final Player p = (Player) event.getWhoClicked();
     }
 
-    public void TeleportToArenaSpawnNPC(int gameMode, HumanEntity sender) throws IOException {
+    @EventHandler
+    public void OnPlayerInteractEvent(final PlayerInteractEvent event) {
+        if(event.getPlayer().getWorld().getName().equals("arena")) {
+            if(!ChanaSMP.PlayerOnPearlCooldown.contains(event.getPlayer().getName())) {
+                if (event.getMaterial() == Material.ENDER_PEARL) {
+                    ChanaSMP.PlayerOnPearlCooldown.add(event.getPlayer().getName());
+                    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(ChanaSMP.plugin, new Runnable(){
+                        public void run(){
+                            ChanaSMP.PlayerOnPearlCooldown.remove(event.getPlayer().getName());
+                        }
+                    }, 200);
+                }
+            }
+            else {
+                event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f You must wait for another 12 seconds before using the pearl again."));
+                event.setCancelled(true);
+                return;
+            }
+        }
+    }
+
+    public static void TeleportToArenaSpawnNPC(int gameMode, Player sender) throws IOException {
         for(int i = 0; i < Bukkit.getServer().getWorld("arena").getPlayers().size(); i++) {
             if(i == 0) {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mv tp " + sender.getName() + " arena");
                 String uuid = sender.getUniqueId().toString();
                 HttpURLConnection sessionConn = (HttpURLConnection) new URL("https://sessionserver.mojang.com/session/minecraft/profile/"+uuid.replace("-", "")).openConnection();
-                /*JSONTokener tokener = new JSONTokener(sessionConn.getInputStream());
-                JSONObject root = new JSONObject(tokener);
-                Object sessionProperties = root.getString("properties");*/
-                //Above Do the JSON parse
+                NPC FightBot = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, sender.getName());
             }
             else {
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Arena is currently in used, please try again later."));

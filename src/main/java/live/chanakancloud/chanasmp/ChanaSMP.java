@@ -15,6 +15,7 @@ import java.util.List;
 public class ChanaSMP extends JavaPlugin {
 
     public static List<String> FreezedPlayers = new ArrayList<String>();
+    public static List<String> PlayerOnPearlCooldown = new ArrayList<String>();
     public static ChanaSMP plugin;
 
     @Override

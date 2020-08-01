@@ -2,7 +2,7 @@ main: live.chanakancloud.chanasmp.ChanaSMP
 name: ChanaSMP
 version: 0.1.7-DEV
 api-version: 1.15
-depend: [ProtocolLib]
+depend: [ProtocolLib, Citizens]
 commands:
   freeze:
     description: To Freeze Player
