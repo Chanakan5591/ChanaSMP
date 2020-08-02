@@ -3,6 +3,7 @@ package live.chanakancloud.chanasmp.events;
 import live.chanakancloud.chanasmp.ChanaSMP;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.trait.LookClose;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -105,6 +106,7 @@ public class BotDuelGUI implements Listener {
             NPC FightBot = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "BOT_" + sender.getName());
             FightBot.spawn(new Location(sender.getWorld(), 27, 4 ,37));
             FightBot.getNavigator().setTarget(sender, true);
+            FightBot.getTrait(LookClose.class).lookClose(true);
             FightBot.getNavigator().getLocalParameters().attackRange(3.0).attackDelayTicks(2);
         }
         else {
