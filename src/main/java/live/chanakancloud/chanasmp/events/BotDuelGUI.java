@@ -21,6 +21,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 public class BotDuelGUI implements Listener {
     public static Inventory inv;
@@ -53,7 +54,7 @@ public class BotDuelGUI implements Listener {
     }
 
     @EventHandler
-    public void onInventoryClick(final InventoryClickEvent event) {
+    public void onInventoryClick(final InventoryClickEvent event) throws InterruptedException {
         if(event.getInventory() != inv) return;
         event.setCancelled(true);
         final ItemStack ClickedItem = event.getCurrentItem();
@@ -97,7 +98,7 @@ public class BotDuelGUI implements Listener {
         }
     }
 
-    public static void TeleportToArenaSpawnNPC(int gameMode, Player sender) {
+    public static void TeleportToArenaSpawnNPC(int gameMode, Player sender) throws InterruptedException {
         if(Bukkit.getServer().getWorld("arena").getPlayers().isEmpty()) {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mv tp " + sender.getName() + " arena");
             String uuid = sender.getUniqueId().toString();
@@ -105,6 +106,7 @@ public class BotDuelGUI implements Listener {
             NPC FightBot = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "BOT_" + sender.getName());
             FightBot.getNavigator().setTarget(sender, true);
             FightBot.getNavigator().getLocalParameters().attackRange(3.0).attackDelayTicks(2);
+            TimeUnit.SECONDS.sleep(1);
             FightBot.spawn(new Location(sender.getWorld(), 27, 4 ,37));
         }
         else {
