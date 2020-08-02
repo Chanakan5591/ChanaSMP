@@ -16,3 +16,6 @@ commands:
   chanasmp:
     description: Main command for the plugin
     usage: /chanasmp
+  jumpscare:
+    description: To jumpscare someone
+    usage: /jumpscare [player_name]

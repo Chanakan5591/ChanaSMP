@@ -83,19 +83,18 @@ public class BotDuelGUI implements Listener {
     @EventHandler
     public void OnPlayerInteractEvent(final PlayerInteractEvent event) {
         if(event.getPlayer().getWorld().getName().equals("arena")) {
-            if(!ChanaSMP.PlayerOnPearlCooldown.contains(event.getPlayer().getName())) {
-                if (event.getMaterial() == Material.ENDER_PEARL) {
+            if (event.getMaterial() == Material.ENDER_PEARL) {
+                if(!ChanaSMP.PlayerOnPearlCooldown.contains(event.getPlayer().getName())) {
                     ChanaSMP.PlayerOnPearlCooldown.add(event.getPlayer().getName());
                     Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(ChanaSMP.plugin, new Runnable(){
                         public void run(){
                             ChanaSMP.PlayerOnPearlCooldown.remove(event.getPlayer().getName());
                         }
                     }, 240L);
+                } else {
+                    event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f You must wait for another 12 seconds before using the pearl again."));
+                    event.setCancelled(true);
                 }
-            }
-            else {
-                event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f You must wait for another 12 seconds before using the pearl again."));
-                event.setCancelled(true);
             }
         }
     }

@@ -1,12 +1,9 @@
 package live.chanakancloud.chanasmp;
 
-import live.chanakancloud.chanasmp.commands.UnfreezeCommand;
-import live.chanakancloud.chanasmp.commands.MainCommand;
-import live.chanakancloud.chanasmp.commands.FreezeCommand;
+import live.chanakancloud.chanasmp.commands.*;
 import live.chanakancloud.chanasmp.events.PlayerFreeze;
 import live.chanakancloud.chanasmp.events.BotDuelGUI;
 import live.chanakancloud.chanasmp.packet.PacketListener;
-import live.chanakancloud.chanasmp.commands.BotDuelCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -31,6 +28,7 @@ public class ChanaSMP extends JavaPlugin {
         this.getCommand("freeze").setExecutor(new FreezeCommand());
         this.getCommand("unfreeze").setExecutor(new UnfreezeCommand());
         this.getCommand("chanasmp").setExecutor(new MainCommand());
+        this.getCommand("jumpscare").setExecutor(new JumpscareCommand());
         getLogger().info("Hooking into PacketListener");
         PacketListener.Listener();
     }
