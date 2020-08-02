@@ -15,6 +15,10 @@ public class FreezeCommand implements CommandExecutor {
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Usage: /freeze <Player Name>"));
             return true;
         }
+        if(!sender.hasPermission("chanasmp.commands.freeze")) {
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f You are not allowed to run this command!"));
+            return true;
+        }
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (p.getName().equals(args[0])) {
                 if (!ChanaSMP.FreezedPlayers.contains(args[0])) {
@@ -24,9 +28,6 @@ public class FreezeCommand implements CommandExecutor {
                 } else {
                     sender.sendMessage(ChatColor.GREEN + "[ChanaSMP]" + ChatColor.WHITE + "Player is already frozen!");
                 }
-            }
-            else {
-                sender.sendMessage(ChatColor.GREEN + "[ChanaSMP] " + ChatColor.WHITE + "Player is offline or not a valid player name");
             }
         }
         return true;

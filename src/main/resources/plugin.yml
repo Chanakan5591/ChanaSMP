@@ -7,11 +7,9 @@ commands:
   freeze:
     description: To Freeze Player
     usage: /freeze [player_name]
-    permission: chanasmp.commands.freeze
   unfreeze:
     description: unfreeze player
     usage: /unfreeze [player_name]
-    permission: chanasmp.commands.unfreeze
   botduel:
     description: To Duel with a bot
     usage: /botduel
