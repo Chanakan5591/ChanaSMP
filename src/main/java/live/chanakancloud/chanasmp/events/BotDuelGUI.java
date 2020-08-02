@@ -19,9 +19,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Arrays;
 
 public class BotDuelGUI implements Listener {
@@ -55,7 +52,7 @@ public class BotDuelGUI implements Listener {
     }
 
     @EventHandler
-    public void onInventoryClick(final InventoryClickEvent event) throws IOException {
+    public void onInventoryClick(final InventoryClickEvent event) {
         if(event.getInventory() != inv) return;
         event.setCancelled(true);
         final ItemStack ClickedItem = event.getCurrentItem();
@@ -99,11 +96,11 @@ public class BotDuelGUI implements Listener {
         }
     }
 
-    public static void TeleportToArenaSpawnNPC(int gameMode, Player sender) throws IOException {
+    public static void TeleportToArenaSpawnNPC(int gameMode, Player sender) {
         if(Bukkit.getServer().getWorld("arena").getPlayers().isEmpty()) {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mv tp " + sender.getName() + " arena");
             String uuid = sender.getUniqueId().toString();
-            HttpURLConnection sessionConn = (HttpURLConnection) new URL("https://sessionserver.mojang.com/session/minecraft/profile/"+uuid.replace("-", "")).openConnection();
+            //HttpURLConnection sessionConn = (HttpURLConnection) new URL("https://sessionserver.mojang.com/session/minecraft/profile/"+uuid.replace("-", "")).openConnection();
             NPC FightBot = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, sender.getName());
         }
         else {
