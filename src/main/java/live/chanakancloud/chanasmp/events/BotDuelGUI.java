@@ -10,6 +10,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -65,6 +67,20 @@ public class BotDuelGUI implements Listener {
     }
 
     @EventHandler
+    public void onPlayerBlockBreak(final BlockBreakEvent event) {
+        if(event.getPlayer().getWorld().getName().equals("arena")) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerBlockPlace(final BlockPlaceEvent event) {
+        if(event.getPlayer().getWorld().getName().equals("arena")) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
     public void OnPlayerInteractEvent(final PlayerInteractEvent event) {
         if(event.getPlayer().getWorld().getName().equals("arena")) {
             if(!ChanaSMP.PlayerOnPearlCooldown.contains(event.getPlayer().getName())) {
@@ -74,13 +90,12 @@ public class BotDuelGUI implements Listener {
                         public void run(){
                             ChanaSMP.PlayerOnPearlCooldown.remove(event.getPlayer().getName());
                         }
-                    }, 200);
+                    }, 240L);
                 }
             }
             else {
                 event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f You must wait for another 12 seconds before using the pearl again."));
                 event.setCancelled(true);
-                return;
             }
         }
     }
