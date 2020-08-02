@@ -5,6 +5,7 @@ import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -53,10 +54,7 @@ public class BotDuelGUI implements Listener {
 
     @EventHandler
     public void onInventoryClick(final InventoryClickEvent event) {
-        event.getWhoClicked().sendMessage(inv.toString());
-        event.getWhoClicked().sendMessage(event.getInventory().toString());
         if(event.getInventory() != inv) return;
-        event.getWhoClicked().sendMessage("pass");
         event.setCancelled(true);
         final ItemStack ClickedItem = event.getCurrentItem();
         if(ClickedItem == null || ClickedItem.getType() == Material.AIR) return;
@@ -104,7 +102,10 @@ public class BotDuelGUI implements Listener {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mv tp " + sender.getName() + " arena");
             String uuid = sender.getUniqueId().toString();
             //HttpURLConnection sessionConn = (HttpURLConnection) new URL("https://sessionserver.mojang.com/session/minecraft/profile/"+uuid.replace("-", "")).openConnection();
-            NPC FightBot = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, sender.getName());
+            NPC FightBot = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "BOT_" + sender.getName());
+            FightBot.getNavigator().setTarget(sender, true);
+            FightBot.getNavigator().getLocalParameters().attackRange(3.0).attackDelayTicks(2);
+            FightBot.spawn(new Location(sender.getWorld(), 27, 4 ,37));
         }
         else {
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Arena is currently in used, please try again later."));
