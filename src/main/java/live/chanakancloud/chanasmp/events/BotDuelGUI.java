@@ -106,6 +106,8 @@ public class BotDuelGUI implements Listener {
             NPC FightBot = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "BOT_" + sender.getName());
             FightBot.spawn(new Location(sender.getWorld(), 27, 4 ,37));
             FightBot.getNavigator().setTarget(sender, true);
+            FightBot.getNavigator().getDefaultParameters().speedModifier(1.5F);
+            FightBot.getNavigator().getLocalParameters().speedModifier(1.5F);
             FightBot.getTrait(LookClose.class).lookClose(true);
             FightBot.getNavigator().getLocalParameters().attackRange(3.0).attackDelayTicks(2);
         }
