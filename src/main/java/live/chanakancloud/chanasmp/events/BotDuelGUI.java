@@ -55,6 +55,7 @@ public class BotDuelGUI implements Listener {
     public void onInventoryClick(final InventoryClickEvent event) {
         event.getWhoClicked().sendMessage("E");
         if(event.getInventory() != inv) return;
+        event.getWhoClicked().sendMessage("A");
         event.setCancelled(true);
         final ItemStack ClickedItem = event.getCurrentItem();
         if(ClickedItem == null || ClickedItem.getType() == Material.AIR) return;
