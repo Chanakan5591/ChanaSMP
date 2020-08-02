@@ -100,16 +100,14 @@ public class BotDuelGUI implements Listener {
     }
 
     public static void TeleportToArenaSpawnNPC(int gameMode, Player sender) throws IOException {
-        for(int i = 0; i < Bukkit.getServer().getWorld("arena").getPlayers().size(); i++) {
-            if(i == 0) {
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mv tp " + sender.getName() + " arena");
-                String uuid = sender.getUniqueId().toString();
-                HttpURLConnection sessionConn = (HttpURLConnection) new URL("https://sessionserver.mojang.com/session/minecraft/profile/"+uuid.replace("-", "")).openConnection();
-                NPC FightBot = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, sender.getName());
-            }
-            else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Arena is currently in used, please try again later."));
-            }
+        if(Bukkit.getServer().getWorld("arena").getPlayers().isEmpty()) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "mv tp " + sender.getName() + " arena");
+            String uuid = sender.getUniqueId().toString();
+            HttpURLConnection sessionConn = (HttpURLConnection) new URL("https://sessionserver.mojang.com/session/minecraft/profile/"+uuid.replace("-", "")).openConnection();
+            NPC FightBot = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, sender.getName());
+        }
+        else {
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Arena is currently in used, please try again later."));
         }
 
         //kit add to user and NPC
