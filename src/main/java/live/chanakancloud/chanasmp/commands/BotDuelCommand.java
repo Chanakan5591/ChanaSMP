@@ -1,8 +1,6 @@
 package live.chanakancloud.chanasmp.commands;
 
 import live.chanakancloud.chanasmp.events.BotDuelGUI;
-import live.chanakancloud.chanasmp.ChanaSMP;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,7 +15,6 @@ public class BotDuelCommand implements CommandExecutor {
         }
         if(sender instanceof Player) {
             BotDuelGUI bdg = new BotDuelGUI();
-            bdg.initializeItems();
             Player p = (Player) sender;
             bdg.openInventory(p);
             return true;
