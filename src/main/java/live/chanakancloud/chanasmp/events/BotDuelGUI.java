@@ -22,7 +22,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.Arrays;
 
 public class BotDuelGUI implements Listener {
-    private final Inventory inv;
+    public static Inventory inv;
 
     public BotDuelGUI() {
         inv = Bukkit.createInventory(null, 9, "Bot Duel Kits");
@@ -47,7 +47,7 @@ public class BotDuelGUI implements Listener {
 
         return item;
     }
-    public void openInventory(final Player player) {
+    public static void openInventory(final Player player) {
         player.openInventory(inv);
     }
 

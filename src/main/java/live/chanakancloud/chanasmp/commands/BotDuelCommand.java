@@ -1,11 +1,12 @@
 package live.chanakancloud.chanasmp.commands;
 
-import live.chanakancloud.chanasmp.events.BotDuelGUI;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import static live.chanakancloud.chanasmp.events.BotDuelGUI.openInventory;
 
 public class BotDuelCommand implements CommandExecutor {
     @Override
@@ -14,9 +15,8 @@ public class BotDuelCommand implements CommandExecutor {
             ;
         }
         if(sender instanceof Player) {
-            BotDuelGUI bdg = new BotDuelGUI();
             Player p = (Player) sender;
-            bdg.openInventory(p);
+            openInventory(p);
             return true;
         } else {
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&c Only Player can use this command!"));
