@@ -18,10 +18,10 @@ public class FlyCommand implements CommandExecutor {
           Player player = (Player) sender;
           if(player.getAllowFlight() == false) {
             player.setAllowFlight(true);
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Fly is enabled"))
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Fly is enabled"));
           } else {
             player.setAllowFlight(false);
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Fly is disabled"))
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Fly is disabled"));
           }
         }
         return true;
