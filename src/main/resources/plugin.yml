@@ -19,3 +19,7 @@ commands:
   jumpscare:
     description: To jumpscare someone
     usage: /jumpscare [player_name]
+
+  fly:
+    description: To fly while not in creative mode
+    usage: /fly
