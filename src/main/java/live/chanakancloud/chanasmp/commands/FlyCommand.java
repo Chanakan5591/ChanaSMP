@@ -18,6 +18,8 @@ public class FlyCommand implements CommandExecutor {
           Player player = (Player) sender;
           if(player.getAllowFlight() == false) {
             player.setAllowFlight(true);
+          } else {
+            player.setAllowFlight(false);
           }
         }
         return true;
