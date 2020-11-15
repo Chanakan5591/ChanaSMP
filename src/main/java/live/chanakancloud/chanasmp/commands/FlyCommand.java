@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class FlyCommand implements CommandExecutor {
     @Override
@@ -12,10 +13,13 @@ public class FlyCommand implements CommandExecutor {
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f You are not allowed to run this command!"));
             return true;
         }
-        if(sender.getAllowFlight() == false){
-            sender.setAllowFlight(true);
-        	return true;
-      	}
+
+        if (sender instanceof Player) {
+          Player player = (Player) sender;
+          if(player.getAllowFlight() == false) {
+            player.setAllowFlight(true);
+          }
+        }
         return true;
     }
 }

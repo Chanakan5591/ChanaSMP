@@ -18,7 +18,7 @@ public class ChanaSMP extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        getLogger().info("ChanaSMP v0.1.0-DEV Loading..");
+        getLogger().info("ChanaSMP v1.4.7-DEV Loading..");
         getLogger().info("Registering Events");
         getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         getServer().getPluginManager().registerEvents(new PlayerFreeze(), this);

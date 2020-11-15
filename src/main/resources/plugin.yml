@@ -1,6 +1,6 @@
 main: live.chanakancloud.chanasmp.ChanaSMP
 name: ChanaSMP
-version: 0.1.7-DEV
+version: 1.4.7-DEV
 api-version: 1.15
 depend: [ProtocolLib, Citizens]
 commands:
