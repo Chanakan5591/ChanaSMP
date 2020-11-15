@@ -2,7 +2,7 @@ package live.chanakancloud.chanasmp;
 
 import live.chanakancloud.chanasmp.commands.*;
 import live.chanakancloud.chanasmp.events.PlayerFreeze;
-import live.chanakancloud.chanasmp.events.BotDuelGUI;
+// import live.chanakancloud.chanasmp.events.BotDuelGUI;
 import live.chanakancloud.chanasmp.packet.PacketListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,9 +22,10 @@ public class ChanaSMP extends JavaPlugin {
         getLogger().info("Registering Events");
         getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         getServer().getPluginManager().registerEvents(new PlayerFreeze(), this);
-        getServer().getPluginManager().registerEvents(new BotDuelGUI(), this);
+        // getServer().getPluginManager().registerEvents(new BotDuelGUI(), this);
         getLogger().info("Registering Commands");
-        this.getCommand("botduel").setExecutor(new BotDuelCommand());
+        this.getCommand("fly").setExecutor(new FlyCommand());
+        // this.getCommand("botduel").setExecutor(new BotDuelCommand());
         this.getCommand("freeze").setExecutor(new FreezeCommand());
         this.getCommand("unfreeze").setExecutor(new UnfreezeCommand());
         this.getCommand("chanasmp").setExecutor(new MainCommand());
