@@ -13,6 +13,7 @@ public class ChanaSMP extends JavaPlugin {
 
     public static List<String> FreezedPlayers = new ArrayList<String>();
     public static List<String> PlayerOnPearlCooldown = new ArrayList<String>();
+    public static List<String> MutedPlayer = new ArrayList<String>();
     public static ChanaSMP plugin;
 
     @Override
@@ -30,12 +31,14 @@ public class ChanaSMP extends JavaPlugin {
         this.getCommand("unfreeze").setExecutor(new UnfreezeCommand());
         this.getCommand("chanasmp").setExecutor(new MainCommand());
         this.getCommand("jumpscare").setExecutor(new JumpscareCommand());
+        this.getCommand("mute").setExecutor(new MuteCommand());
         getLogger().info("Hooking into PacketListener");
         PacketListener.Listener();
     }
 
     @Override
     public void onDisable() {
-
+        FreezedPlayers = new ArrayList<String>();
+        MutedPlayer = new ArrayList<String>();
     }
 }

@@ -16,7 +16,7 @@ public class FlyCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
           Player player = (Player) sender;
-          if(player.getAllowFlight() == false) {
+          if(!player.getAllowFlight()) {
             player.setAllowFlight(true);
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Fly is enabled"));
           } else {

@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class ChatFilter {
+public class ChatEvent {
     public static void Filter(PacketEvent event) {
         PacketContainer packet = event.getPacket();
         String message = packet.getStrings().read(0);
@@ -23,6 +23,14 @@ public class ChatFilter {
 
                 }
             }
+        }
+    }
+    public static void Mute(PacketEvent event) {
+        PacketContainer packet = event.getPacket();
+
+        if(ChanaSMP.MutedPlayer.contains(event.getPlayer().getName())) {
+            event.setCancelled(true);
+            event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f You are currently muted!"));
         }
     }
 }

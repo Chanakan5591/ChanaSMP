@@ -8,26 +8,29 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class FreezeCommand implements CommandExecutor {
+//TODOS: Check if player have bypass perm, if yes then error
+
+//DON'T FORGET TO CREATE UNMUTE
+
+public class MuteCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(!sender.hasPermission("chanasmp.commands.freeze")) {
+        if(!sender.hasPermission("chanasmp.commands.mute")) {
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f You are not allowed to run this command!"));
             return true;
         }
         if (args.length == 0) {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Usage: /freeze <Player Name>"));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Usage: /mute <Player Name> <Reason>"));
             return true;
         }
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (p.getName().equals(args[0])) {
-                if (!ChanaSMP.FreezedPlayers.contains(args[0])) {
-                    ChanaSMP.FreezedPlayers.add(args[0]);
-                    sender.sendMessage(ChatColor.GREEN + "[ChanaSMP] " + ChatColor.WHITE + "Player froze!");
-                    p.sendMessage(ChatColor.GREEN + "[ChanaSMP] " + ChatColor.RED + "You have been frozen by moderator!");
-                } else {
-                    sender.sendMessage(ChatColor.GREEN + "[ChanaSMP]" + ChatColor.WHITE + "Player is already frozen!");
-                }
+               if(!ChanaSMP.MutedPlayer.contains(args[0])) {
+                   ChanaSMP.MutedPlayer.add(args[0]);
+                   sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Muted Player"));
+               }
+            } else {
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a[ChanaSMP]&f Player is not online!"));
             }
         }
         return true;
